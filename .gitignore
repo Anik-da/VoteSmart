@@ -1,0 +1,14 @@
+
+# Environments
+.env
+.env.local
+
+# Temporary files
+scratch/
+.firebase/
+node_modules/
+dist/
+
+# OS files
+.DS_Store
+Thumbs.db

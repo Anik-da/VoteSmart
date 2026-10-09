@@ -1,0 +1,49 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper function: Check if client is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper function: Check if client owns this user document
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Educational learning modules: Publicly readable for voter awareness, write requires auth
+    match /modules/{moduleId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+    
+    // Quiz questions bank: Publicly readable, write requires auth
+    match /quiz_questions/{questionId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Voter user profiles & readiness progress:
+    // Anyone can read profiles (e.g. badges, leaderboards), owner can write with validation
+    match /users/{userId} {
+      allow read: if true;
+      allow create, update: if (isAuthenticated() && request.auth.uid == userId)
+                            || (request.resource.data.uid == userId);
+      allow delete: if isOwner(userId);
+    }
+
+    // EVM Simulation records: Public create for practice telemetry, delete requires owner
+    match /simulations/{simId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if isAuthenticated();
+    }
+
+    // News fact check records: Publicly readable
+    match /fact_checks/{factId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+  }
+}

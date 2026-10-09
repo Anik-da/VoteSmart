@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Assistant | SmartVote India</title>
+    <meta name="description" content="Ask our AI-powered Election Assistant anything about Indian elections, voting, and democracy.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="chatbot-page">
+    <!-- Skip to main content -->
+    <a href="#main-content" class="skip-link">Skip to chat</a>
+
+    <!-- Navbar -->
+    <nav class="navbar scrolled" aria-label="Main Navigation">
+        <div class="container">
+            <a href="index.html" class="logo" aria-label="VoteSmart India Home">
+                <span class="logo-v">Vote</span><span class="logo-s">Smart</span> <span class="logo-i">India</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" data-translate>Home</a></li>
+                <li><a href="learning.html" data-translate>Learn</a></li>
+                <li><a href="quiz.html" data-translate>Quiz</a></li>
+                <li><a href="chatbot.html" class="active" data-translate>AI Assistant</a></li>
+                <li><a href="simulator.html" data-translate>Simulator</a></li>
+                <li><a href="fakenews.html" data-translate>Fake News</a></li>
+                <li><a href="dashboard.html" data-translate>Dashboard</a></li>
+                <li><button class="lang-toggle" id="lang-toggle-btn" title="हिंदी में बदलें" aria-label="Toggle language between English and Hindi">🌐 हि</button></li>
+                <li><a href="javascript:void(0)" class="btn-login" id="login-btn" data-translate>Login</a></li>
+                <li id="user-profile" style="display: none;">
+                    <div class="user-dropdown">
+                        <span id="user-name">User</span>
+                        <div class="dropdown-content">
+                            <a href="dashboard.html">Dashboard</a>
+                            <a href="javascript:void(0)" id="logout-btn">Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger" role="button" aria-label="Toggle navigation menu" aria-expanded="false" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chat Interface -->
+    <main class="chat-container" id="main-content">
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="chat-avatar-header">🤖</div>
+                <div>
+                    <h2><span data-translate>Election Assistant</span> <span class="model-badge" style="font-size: 0.75rem; padding: 3px 8px; border-radius: 12px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); vertical-align: middle;">Gemma 4</span></h2>
+                    <p class="chat-status" id="chat-status" data-translate>Online — Ask me anything about elections</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="chat-messages" id="chat-messages" role="log" aria-live="polite">
+            <!-- Welcome Message -->
+            <div class="message bot-message">
+                <div class="message-avatar">🤖</div>
+                <div class="message-bubble">
+                    <p data-translate>Namaste! 🇮🇳 I'm your <strong>Election Assistant</strong> powered by <strong>Gemma 4</strong>. I can help you understand:</p>
+                    <ul>
+                        <li data-translate>How to register and vote</li>
+                        <li data-translate>The election process in India</li>
+                        <li data-translate>EVMs, VVPAT, and NOTA</li>
+                        <li data-translate>Your rights as a voter</li>
+                    </ul>
+                    <p data-translate>Ask me anything!</p>
+                </div>
+                <span class="message-time">Just now</span>
+            </div>
+
+            <!-- Suggested Questions -->
+            <div class="suggested-questions" id="suggested-questions">
+                <button class="suggestion-chip" data-q="How do I register to vote in India?" data-translate>How to register to vote?</button>
+                <button class="suggestion-chip" data-q="What is NOTA and how does it work?" data-translate>What is NOTA?</button>
+                <button class="suggestion-chip" data-q="What documents do I need to vote?" data-translate>Documents needed to vote?</button>
+                <button class="suggestion-chip" data-q="How does an EVM work?" data-translate>How does EVM work?</button>
+            </div>
+        </div>
+
+        <!-- Chat Input -->
+        <div class="chat-input-area">
+            <div class="chat-input-wrapper">
+                <input type="text" id="chat-input" placeholder="Type your question about elections..." autocomplete="off" aria-label="Type your question about elections" data-translate>
+                <button id="send-btn" class="send-btn" aria-label="Send message">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+            <p class="chat-disclaimer" data-translate>Powered by Gemma 4 AI • Responses are for educational purposes only</p>
+        </div>
+    </main>
+
+
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="chatbot.js"></script>
+    <script type="module" src="translate.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "votesmart-india",
+  "version": "1.0.0",
+  "description": "Bilingual platform for voter awareness in India",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "predev": "node scripts/generate-config.js",
+    "dev": "vite",
+    "build": "node scripts/generate-config.js && vite build",
+    "preview": "vite preview",
+    "lint": "node scripts/lint-check.js",
+    "test": "node tests/voteSmart.test.js",
+    "deploy": "npm run build && firebase deploy --only hosting,firestore:rules"
+  },
+  "devDependencies": {
+    "@google/genai": "^1.51.0",
+    "firebase": "^12.12.1",
+    "firebase-tools": "^15.16.0",
+    "vite": "^8.0.10"
+  }
+}

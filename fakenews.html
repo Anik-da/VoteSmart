@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detection | SmartVote India</title>
+    <meta name="description" content="Analyze news articles to check sentiment and potential bias or fake news indicators.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Skip to main content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar" aria-label="Main Navigation">
+        <div class="container">
+            <a href="index.html" class="logo" aria-label="VoteSmart India Home">
+                <span class="logo-v">Vote</span><span class="logo-s">Smart</span> <span class="logo-i">India</span>
+            </a>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" data-translate>Home</a></li>
+                <li><a href="learning.html" data-translate>Learn</a></li>
+                <li><a href="quiz.html" data-translate>Quiz</a></li>
+                <li><a href="chatbot.html" data-translate>AI Assistant</a></li>
+                <li><a href="simulator.html" data-translate>Simulator</a></li>
+                <li><a href="fakenews.html" class="active" data-translate>Fake News</a></li>
+                <li><a href="dashboard.html" data-translate>Dashboard</a></li>
+                <li><button class="lang-toggle" id="lang-toggle-btn" title="हिंदी में बदलें" aria-label="Toggle language between English and Hindi">🌐 हि</button></li>
+                <li><a href="login.html" class="btn-login" id="login-btn" data-translate>Login</a></li>
+                <li id="user-profile" style="display: none;">
+                    <div class="user-dropdown">
+                        <span id="user-name">User</span>
+                        <div class="dropdown-content">
+                            <a href="dashboard.html">Dashboard</a>
+                            <a href="javascript:void(0)" id="logout-btn">Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger" role="button" aria-label="Toggle navigation menu" aria-expanded="false" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Landmark -->
+    <main id="main-content">
+    <div class="page-header">
+        <div class="container">
+            <h1 data-translate>Fake News <span data-translate>Detection</span></h1>
+            <p data-translate>Paste an article or snippet to analyze its sentiment and identify potential sensationalism.</p>
+        </div>
+    </div>
+
+    <section class="fakenews-section">
+        <div class="container">
+            <div class="fakenews-container">
+                <div class="input-card">
+                    <h2 data-translate>Text Analysis</h2>
+                    <p data-translate>Enter the text you want to analyze below.</p>
+                    <label for="news-input" class="sr-only">News article or claim text</label>
+                    <textarea id="news-input" placeholder="Paste news article or claim here..." rows="8" aria-label="Paste news article or claim to analyze" data-translate></textarea>
+                    <button id="analyze-btn" class="btn btn-primary btn-block" data-translate>Analyze</button>
+                    <div id="loading-indicator" class="loading-indicator" style="display: none;">
+                        <div class="spinner"></div>
+                        <p data-translate>Analyzing text with Gemma 4 AI...</p>
+                    </div>
+                </div>
+
+                <div id="result-card" class="result-card" style="display: none;">
+                    <h2 data-translate>Analysis Results</h2>
+                    <div class="result-grid">
+                        <div class="result-box">
+                            <div class="result-label" data-translate>Sentiment</div>
+                            <div id="sentiment-value" class="result-value">--</div>
+                            <div id="sentiment-desc" class="result-desc" data-translate>Determining tone...</div>
+                        </div>
+                        <div class="result-box">
+                            <div class="result-label" data-translate>Magnitude</div>
+                            <div id="magnitude-value" class="result-value">--</div>
+                            <div id="magnitude-desc" class="result-desc" data-translate>Emotional strength...</div>
+                        </div>
+                        <div class="result-box full-width fake-real-indicator" id="fake-real-box">
+                            <div class="result-label" data-translate>Potential Sensationalism</div>
+                            <div id="fake-indicator" class="result-value" data-translate>Analyzing...</div>
+                            <div id="fake-desc" class="result-desc" data-translate>Checking for extreme sentiment common in fake/sensationalized news.</div>
+                        </div>
+                    </div>
+                    <button id="reset-btn" class="btn btn-outline btn-block" style="margin-top: 20px;" data-translate>Analyze Another</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <a href="#" class="logo">
+                        <span class="logo-v">Vote</span><span class="logo-s">Smart</span> <span class="logo-i">India</span>
+                    </a>
+                    <p data-translate>Empowering the next generation of voters with technology and transparency.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 data-translate>Platform</h4>
+                        <ul>
+                            <li><a href="learning.html" data-translate>Learn</a></li>
+                            <li><a href="quiz.html" data-translate>Quiz</a></li>
+                            <li><a href="simulator.html" data-translate>Simulator</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4 data-translate>Company</h4>
+                        <ul>
+                            <li><a href="#" data-translate>About</a></li>
+                            <li><a href="#" data-translate>Contact</a></li>
+                            <li><a href="#" data-translate>Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-translate>&copy; 2026 VoteSmart India. All rights reserved. Built with pride for democracy.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="main.js"></script>
+    <script type="module" src="fakenews.js"></script>
+    <script type="module" src="translate.js"></script>
+</body>
+</html>

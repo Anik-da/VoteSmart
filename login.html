@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voter Authentication & Registration | SmartVote India</title>
+    <meta name="description" content="Sign in or register a new voter account to access your voter profile, track learning modules, and view your readiness score.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .login-page {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+            padding: 2.5rem 1rem;
+        }
+
+        .auth-container {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 480px;
+            padding: 2.5rem;
+            position: relative;
+            border: 1px solid #e2e8f0;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header .logo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .auth-header h2 {
+            color: #1e293b;
+            font-size: 1.85rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-header p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Tabs */
+        .auth-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: #f1f5f9;
+            border-radius: 10px;
+            padding: 4px;
+            margin-bottom: 2rem;
+            gap: 4px;
+        }
+
+        .auth-tab-btn {
+            padding: 0.75rem 1rem;
+            border: none;
+            background: transparent;
+            color: #64748b;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .auth-tab-btn.active {
+            background: #ffffff;
+            color: #2563eb;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+        }
+
+        .auth-form-section {
+            display: none;
+        }
+
+        .auth-form-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-row {
+            margin-bottom: 1.25rem;
+            text-align: left;
+        }
+
+        .form-row label {
+            display: block;
+            margin-bottom: 0.4rem;
+            color: #334155;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .form-row label span.required {
+            color: #ef4444;
+        }
+
+        .form-row input,
+        .form-row select {
+            width: 100%;
+            padding: 0.75rem 0.9rem;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: #1e293b;
+            background: #ffffff;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .form-row input:focus,
+        .form-row select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .phone-input-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .phone-prefix {
+            padding: 0.75rem 0.85rem;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            background: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .phone-input-group input {
+            flex: 1;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 0.85rem;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+            margin-top: 1.5rem;
+        }
+
+        .btn-submit:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-submit:disabled {
+            background: #93c5fd;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .auth-divider span {
+            padding: 0 12px;
+        }
+
+        .btn-google {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            color: #374151;
+            border: 1.5px solid #e2e8f0;
+            font-weight: 600;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .btn-google:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+        }
+
+        .btn-quick-mobile {
+            background: #f8fafc;
+            border: 1.5px dashed #cbd5e1;
+            color: #475569;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 0.75rem;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .btn-quick-mobile:hover {
+            background: #eff6ff;
+            border-color: #93c5fd;
+            color: #2563eb;
+        }
+
+        .active-session-banner {
+            background: #f0fdf4;
+            border: 1.5px solid #bbf7d0;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .active-session-banner p {
+            color: #166534;
+            margin: 0 0 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .session-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn-session-dash {
+            background: #16a34a;
+            color: #ffffff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-session-logout {
+            background: #ffffff;
+            color: #dc2626;
+            border: 1px solid #fca5a5;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        #feedback-msg {
+            margin-top: 1rem;
+            min-height: 24px;
+            font-size: 0.9rem;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .hint-text {
+            color: #64748b;
+            font-size: 0.78rem;
+            margin-top: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content -->
+    <a href="#main-content" class="skip-link">Skip to voter authentication</a>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar" aria-label="Main Navigation">
+        <div class="container">
+            <a href="index.html" class="logo" aria-label="VoteSmart India Home">
+                <span class="logo-v">Vote</span><span class="logo-s">Smart</span> <span class="logo-i">India</span>
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="quiz.html">Quiz</a></li>
+                <li><a href="chatbot.html">AI Assistant</a></li>
+                <li><a href="simulator.html">Simulator</a></li>
+                <li><a href="fakenews.html">Fake News</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="login.html" class="btn-login active" id="login-btn">Login</a></li>
+                <li id="user-profile" style="display: none;">
+                    <div class="user-dropdown">
+                        <span id="user-name">User</span>
+                        <div class="dropdown-content">
+                            <a href="dashboard.html">Dashboard</a>
+                            <a href="javascript:void(0)" id="logout-btn">Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger" role="button" aria-label="Toggle navigation menu" aria-expanded="false" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <div class="login-page">
+        <div class="auth-container">
+            <!-- Active Session Banner if user is already logged in -->
+            <div id="active-session-banner" class="active-session-banner" style="display: none;">
+                <p>👋 You are currently signed in as <strong id="current-user-name">Voter</strong></p>
+                <div class="session-actions">
+                    <a href="dashboard.html" class="btn-session-dash">Go to Dashboard</a>
+                    <button id="session-logout-btn" class="btn-session-logout">Sign Out / Switch</button>
+                </div>
+            </div>
+
+            <div class="auth-header">
+                <div class="logo-badge">🇮🇳 National Voter Awareness</div>
+                <h2 id="auth-title">Voter Portal</h2>
+                <p id="auth-subtitle">Sign in or register a new voter account to track your progress.</p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="auth-tabs">
+                <button type="button" class="auth-tab-btn active" id="tab-btn-signin">
+                    🔑 Sign In
+                </button>
+                <button type="button" class="auth-tab-btn" id="tab-btn-register">
+                    📝 Register Account
+                </button>
+            </div>
+
+            <!-- ─── Form 1: Sign In ────────────────────────── -->
+            <div id="signin-section" class="auth-form-section active">
+                <form id="signin-form" onsubmit="return false;">
+                    <div class="form-row">
+                        <label for="signin-identifier">Mobile Number or Email <span class="required">*</span></label>
+                        <input type="text" id="signin-identifier" placeholder="e.g. 9876543210 or voter@example.com" required autocomplete="username">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="signin-password">Password <span class="required">*</span></label>
+                        <input type="password" id="signin-password" placeholder="Enter your password" required autocomplete="current-password">
+                    </div>
+
+                    <button type="submit" id="signin-submit-btn" class="btn-submit">
+                        Sign In to Voter Profile
+                    </button>
+                </form>
+
+                <div class="auth-divider">
+                    <span>OR QUICK ACCESS</span>
+                </div>
+
+                <!-- Google Sign-In -->
+                <button type="button" id="google-login-btn" class="btn-google">
+                    <svg width="18" height="18" viewBox="0 0 18 18" style="margin-right: 10px;">
+                        <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
+                        <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+                        <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.348 2.825.957 4.039l3.007-2.332z"/>
+                        <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
+                    </svg>
+                    Continue with Google
+                </button>
+
+                <!-- Quick Mobile Access Option -->
+                <button type="button" id="quick-mobile-btn" class="btn-quick-mobile">
+                    ⚡ Instant Mobile Access (No Password Needed)
+                </button>
+
+                <div id="quick-mobile-box" style="display: none; margin-top: 1rem; padding: 1rem; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <div class="form-row" style="margin-bottom: 0.75rem;">
+                        <label for="quick-phone-input">Enter 10-Digit Mobile Number</label>
+                        <div class="phone-input-group">
+                            <span class="phone-prefix">+91</span>
+                            <input type="tel" id="quick-phone-input" placeholder="10-digit number" maxlength="10">
+                        </div>
+                    </div>
+                    <button type="button" id="quick-phone-submit" class="btn-submit" style="margin-top: 0.5rem; padding: 0.65rem;">
+                        Enter as Verified Voter
+                    </button>
+                </div>
+            </div>
+
+            <!-- ─── Form 2: Register New Account ───────────── -->
+            <div id="register-section" class="auth-form-section">
+                <form id="register-form" onsubmit="return false;">
+                    <div class="form-row">
+                        <label for="reg-name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="reg-name" placeholder="e.g. Rahul Sharma" required autocomplete="name">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="reg-phone">Mobile Number <span class="required">*</span></label>
+                        <div class="phone-input-group">
+                            <span class="phone-prefix">+91</span>
+                            <input type="tel" id="reg-phone" placeholder="10-digit mobile number" maxlength="10" required autocomplete="tel">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="reg-email">Email Address (Optional)</label>
+                        <input type="email" id="reg-email" placeholder="e.g. rahul@example.com" autocomplete="email">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="reg-voter-id">Voter ID / EPIC Number (Optional)</label>
+                        <input type="text" id="reg-voter-id" placeholder="e.g. ABC1234567 (or leave blank to auto-generate)">
+                        <div class="hint-text">If you don't have one yet, an official digital voter number will be generated for you.</div>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="reg-state">State / Union Territory</label>
+                        <select id="reg-state">
+                            <option value="All India">All India (National)</option>
+                            <option value="Delhi">Delhi NCT</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="West Bengal">West Bengal</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="reg-password">Password <span class="required">*</span></label>
+                        <input type="password" id="reg-password" placeholder="At least 6 characters" required autocomplete="new-password">
+                    </div>
+
+                    <button type="submit" id="register-submit-btn" class="btn-submit">
+                        ✅ Create Voter Account
+                    </button>
+                </form>
+
+                <div class="auth-divider">
+                    <span>OR REGISTER WITH</span>
+                </div>
+
+                <button type="button" id="google-register-btn" class="btn-google">
+                    <svg width="18" height="18" viewBox="0 0 18 18" style="margin-right: 10px;">
+                        <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
+                        <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+                        <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.348 2.825.957 4.039l3.007-2.332z"/>
+                        <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
+                    </svg>
+                    Register with Google
+                </button>
+            </div>
+
+            <!-- Feedback Message -->
+            <div id="feedback-msg"></div>
+        </div>
+    </div>
+    </main>
+
+    <!-- Scripts -->
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="login.js"></script>
+</body>
+</html>
