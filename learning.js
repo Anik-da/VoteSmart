@@ -76,9 +76,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 image: "assets/module-elections.png",
                 steps: [
                     { text: "Elections in India are conducted by the Election Commission of India (ECI), an autonomous constitutional authority.", image: "assets/module-elections.png" },
-                    { text: "The process begins with the President or Governor issuing a notification for the elections.", image: "assets/hero.png" },
+                    { text: "The process begins with the President or Governor issuing a notification for the elections.", image: "assets/learning.png" },
                     { text: "Candidates file nominations and the ECI scrutinizes them to ensure eligibility.", image: "assets/module-elections.png" },
-                    { text: "Campaigning occurs for a specified period, ending 48 hours before the conclusion of the poll.", image: "assets/hero.png" }
+                    { text: "Campaigning occurs for a specified period, ending 48 hours before the conclusion of the poll.", image: "assets/learning.png" }
                 ]
             },
             {
@@ -95,11 +95,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             {
                 title: "What is EVM & VVPAT",
                 description: "Learn about the technology behind Electronic Voting Machines and VVPAT verification.",
-                image: "assets/hero.png",
+                image: "assets/learning.png",
                 steps: [
-                    { text: "Electronic Voting Machines (EVMs) consist of two units: the Control Unit and the Balloting Unit.", image: "assets/hero.png" },
-                    { text: "VVPAT (Voter Verifiable Paper Audit Trail) allows voters to verify that their vote was cast correctly via a paper slip.", image: "assets/hero.png" },
-                    { text: "EVMs are stand-alone machines, not connected to any network, making them tamper-proof.", image: "assets/hero.png" }
+                    { text: "Electronic Voting Machines (EVMs) consist of two units: the Control Unit and the Balloting Unit.", image: "assets/learning.png" },
+                    { text: "VVPAT (Voter Verifiable Paper Audit Trail) allows voters to verify that their vote was cast correctly via a paper slip.", image: "assets/learning.png" },
+                    { text: "EVMs are stand-alone machines, not connected to any network, making them tamper-proof.", image: "assets/learning.png" }
                 ]
             },
             {

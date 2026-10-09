@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             </div>
             <div class="candidate-symbol">${candidate.symbol}</div>
             <div class="candidate-btn-wrapper">
-                <button class="candidate-btn" data-id="${candidate.id}"></button>
+                <button class="candidate-btn" data-id="${candidate.id}" aria-label="Vote for ${candidate.name} (${candidate.party})" title="Vote for ${candidate.name}"></button>
                 <div class="candidate-light" id="light-${candidate.id}"></div>
             </div>
         `;

@@ -139,6 +139,13 @@ describe('Pillar 1: Code Quality & Architecture', () => {
         expect(cfg).toContain('AI_PROVIDER');
         expect(cfg).toContain('FIREBASE');
     });
+
+    test('Learning modules and firebase services reference existing image assets', () => {
+        const learningContent = fs.readFileSync(path.join(PROJECT_ROOT, 'learning.js'), 'utf8');
+        const fbContent = fs.readFileSync(path.join(PROJECT_ROOT, 'firebase-service.js'), 'utf8');
+        expect(learningContent.includes('assets/hero.png')).toBe(false);
+        expect(fbContent.includes('assets/hero.png')).toBe(false);
+    });
 });
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -207,6 +214,13 @@ describe('Pillar 2: Security & Data Integrity', () => {
         expect(validateInput(null).valid).toBe(false);
         expect(validateInput('a'.repeat(301), 300).valid).toBe(false);
         expect(validateInput('Valid election question', 300).valid).toBe(true);
+    });
+
+    test('UI alerts avoid unsafe inline onclick script attributes', () => {
+        const fakeJs = fs.readFileSync(path.join(PROJECT_ROOT, 'fakenews.js'), 'utf8');
+        const chatJs = fs.readFileSync(path.join(PROJECT_ROOT, 'chatbot.js'), 'utf8');
+        expect(fakeJs.includes('onclick="this.parentElement.remove()"')).toBe(false);
+        expect(chatJs.includes('onclick="this.parentElement.remove()"')).toBe(false);
     });
 });
 
@@ -356,6 +370,16 @@ describe('Pillar 5: Accessibility (WCAG 2.1 AA)', () => {
         expect(css).toContain('.skip-link:focus');
         expect(css).toContain(':focus-visible');
         expect(css).toContain('.sr-only');
+    });
+
+    test('EVM simulator candidate buttons specify accessible aria-label attributes', () => {
+        const simJs = fs.readFileSync(path.join(PROJECT_ROOT, 'simulator.js'), 'utf8');
+        expect(simJs).toContain('aria-label="Vote for');
+    });
+
+    test('Interactive quiz options specify accessible aria-label attributes', () => {
+        const quizJs = fs.readFileSync(path.join(PROJECT_ROOT, 'quiz.js'), 'utf8');
+        expect(quizJs).toContain('setAttribute(\'aria-label\'');
     });
 });
 

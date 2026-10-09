@@ -132,8 +132,12 @@ document.addEventListener('DOMContentLoaded', () => {
         alert.innerHTML = `
             <span class="inline-alert-icon">${type === 'error' ? '⚠️' : '💡'}</span>
             <span class="inline-alert-text">${escapeHTML(message)}</span>
-            <button class="inline-alert-close" onclick="this.parentElement.remove()">×</button>
+            <button type="button" class="inline-alert-close" aria-label="Close alert">×</button>
         `;
+        const closeBtn = alert.querySelector('.inline-alert-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => alert.remove());
+        }
         
         // Insert before the chat input area
         const inputArea = chatInput.closest('.chat-input-area') || chatInput.parentNode;

@@ -143,8 +143,11 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < q.options.length; i++) {
             const optText = q.options[i];
             const btn = document.createElement('button');
+            btn.type = 'button';
             btn.className = 'option-btn';
-            btn.textContent = await translateText(optText, lang);
+            const translatedOpt = await translateText(optText, lang);
+            btn.textContent = translatedOpt;
+            btn.setAttribute('aria-label', `Option ${i + 1}: ${translatedOpt}`);
             btn.addEventListener('click', () => handleOptionClick(btn, i));
             ui.optionsContainer.appendChild(btn);
         }
